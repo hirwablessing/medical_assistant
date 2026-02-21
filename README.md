@@ -17,7 +17,7 @@ A medical question-answering assistant built by fine-tuning **TinyLlama-1.1B-Cha
 
 ## Dataset
 
-The **medical_meadow_medical_flashcards** dataset contains 33,955 medical question-answer pairs derived from medical flashcards. It covers a broad range of topics including:
+The **medical_meadow_medical_flashcards** dataset contains 33,955 medical question-answer pairs derived from medical flashcards. It covers a wide range of topics including:
 - Anatomy & Physiology
 - Pharmacology & Drug Mechanisms
 - Pathology & Disease Processes
@@ -51,13 +51,25 @@ All experiments use gradient accumulation to achieve an effective batch size of 
 
 ## Performance Metrics
 
-Metrics are computed on the test set after selecting the best experiment (lowest validation loss). The notebook contains full evaluation results including:
+### Experiment Results
 
-- **BLEU Score**: Measures n-gram precision against reference answers
-- **ROUGE-1 / ROUGE-2 / ROUGE-L**: Measures recall-oriented overlap
-- **Perplexity**: Measures model confidence on test data (lower is better)
+| Experiment | Train Loss | Eval Loss | Training Time | Peak GPU Memory |
+|-----------|-----------|-----------|---------------|-----------------|
+| **Exp 1** | **0.7614** | **0.7914** | 42.0 min | 2.43 GB |
+| Exp 2 | 0.8215 | 0.8048 | 46.5 min | 2.70 GB |
+| Exp 3 | 0.8357 | 0.8073 | 27.5 min | 2.94 GB |
 
-See the notebook for the complete metrics table and experiment comparison charts.
+**Best experiment**: Exp 1 (LR=2e-4, batch size=4, 3 epochs, LoRA rank=16) — lowest validation loss.
+
+### Evaluation Metrics (Test Set)
+
+| Metric | Score |
+|--------|-------|
+| **BLEU** | 0.0454 |
+| **ROUGE-1** | 0.2331 |
+| **ROUGE-2** | 0.0930 |
+| **ROUGE-L** | 0.1546 |
+| **Perplexity** | 2.74 |
 
 ## Example Conversations
 
@@ -88,8 +100,8 @@ See the notebook for the complete metrics table and experiment comparison charts
 
 ```bash
 # Clone the repository
-git clone https://github.com/blessinghirwa/Summative.git
-cd Summative
+git clone https://github.com/hirwablessing/medical_assistant.git
+cd medical_assistant
 
 # Install dependencies
 pip install transformers peft datasets evaluate bitsandbytes trl gradio rouge-score nltk accelerate
@@ -119,7 +131,7 @@ Summative/
 ### Key Libraries
 - `transformers` — Model loading and tokenization
 - `peft` — LoRA adapter configuration
-- `trl` — Supervised fine-tuning trainer (SFTTrainer)
+- `trl` — Training utilities
 - `bitsandbytes` — 4-bit quantization
 - `datasets` — Dataset loading from Hugging Face
 - `evaluate` — ROUGE metric computation
@@ -129,7 +141,7 @@ Summative/
 ## Limitations
 
 - **Model size**: TinyLlama (1.1B params) has inherent reasoning limitations compared to larger models
-- **Dataset scope**: Medical flashcards cover broad topics but may lack depth in specialized areas
+- **Dataset scope**: Medical flashcards cover many topics but may lack depth in specialized areas
 - **No clinical validation**: Responses have not been verified by medical professionals
 - **Educational only**: This tool should NOT be used for medical diagnosis or treatment decisions
 
