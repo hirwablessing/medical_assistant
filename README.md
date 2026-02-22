@@ -1,6 +1,6 @@
 # Medical Domain Assistant via LLM Fine-Tuning
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1sREK2luv_bLZWwq3EnwWHZ3RkwiFPAvf?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tO83s0xJMgmVby1hLw5cLF_ZCeJx-fNv?usp=sharing)
 
 A medical question-answering assistant built by fine-tuning **TinyLlama-1.1B-Chat** using **LoRA** (Low-Rank Adaptation) on medical flashcard data. The model provides accurate, concise answers to medical questions and is deployed through an interactive Gradio chat interface.
 
